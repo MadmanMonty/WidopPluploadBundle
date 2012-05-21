@@ -1,0 +1,21 @@
+{
+    "name": "widop/plupload-bundle",
+    "description": "Provides a Plupload integration for your Symfony2 project.",
+    "keywords": ["plupload"],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Widop",
+            "email": "contact@widop.com"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "2.*",
+        "willdurand/expose-translation-bundle": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "Widop\\PluploadBundle": "" }
+    },
+    "target-dir": "Widop/PluploadBundle"
+}
