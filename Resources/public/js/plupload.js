@@ -56,7 +56,7 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
         max_file_size: '2mb',
         unique_names: true,
         filters: [{
-            title: 'Select a file',
+            title: ExposeTranslation.get('plupload.filters'),
             extensions: 'jpg,png'
         }]
     };
@@ -82,22 +82,22 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
     var _buildContainer = function () {
         var browseButtonHtml =
             '<a id="' + that.selectors.browseButton + '" class="btn" href="#">' +
-                '<i class="icon-upload"></i> Upload' +
+                '<i class="icon-upload"></i> ' + ExposeTranslation.get('plupload.button.upload') +
             '</a>';
 
         var progressHtml = '<div id="' + that.selectors.progressBar + '" class="progress progress-striped active span4" style="margin: 5px 0 0 0; display: none;">' +
                 '<div class="bar" style="width: 1%;"></div>' +
             '</div>';
 
-        var errorHtml = '<span id="' + that.selectors.error + '" class="help-inline" style="display: none;">Error</span>';
+        var errorHtml = '<span id="' + that.selectors.error + '" class="help-inline" style="display: none;">' + ExposeTranslation.get('plupload.error.upload') + '</span>';
 
         $('#' + that.selectors.container).append(browseButtonHtml);
         $('#' + that.selectors.container).append(progressHtml);
         $('#' + that.selectors.container).append(errorHtml);
 
         if (that.options.picture) {
-            var pictureHtml = '<img id="' + that.selectors.picture + '" src="" alt="Uploaded picture" style="display: none;" />';
-            var pictureRemoveHtml = '<a id="' + that.selectors.pictureRemove + '" href="#" style="display: none;">Remove</a>';
+            var pictureHtml = '<img id="' + that.selectors.picture + '" src="" alt="Uploaded picture" style="display: none;width: 500px;" />';
+            var pictureRemoveHtml = '<a id="' + that.selectors.pictureRemove + '" href="#" style="display: none;">' + ExposeTranslation.get('plupload.button.remove') + '</a>';
 
             $('#' + that.selectors.container).append(pictureHtml);
             $('#' + that.selectors.container).append(pictureRemoveHtml);
@@ -115,7 +115,7 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
 
         $(document).on('click', '#' + that.selectors.pictureRemove, function (event) {
             event.preventDefault();
-            
+
             $('#' + that.selectors.picture).attr('src', null);
 
             $('#' + that.selectors.picture).hide();
