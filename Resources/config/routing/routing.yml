@@ -1,0 +1,3 @@
+widop_plupload_upload:
+    pattern:   /plupload/upload
+    defaults:  { _controller: WidopPluploadBundle:Upload:upload }

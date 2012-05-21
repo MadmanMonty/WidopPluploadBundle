@@ -1,0 +1,31 @@
+{% form_theme form _self %}
+
+{% block plupload_widget %}
+{% spaceless %}
+
+    <div id="{{ id }}_container">
+        {{ block('hidden_widget') }}
+    </div>
+
+    <script type="text/javascript" src="{{ asset('bundles/widopplupload/js/lib/plupload.full.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/widopplupload/js/lib/EventEmitter.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/widopplupload/js/plupload.js') }}"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var {{ id }} = new widop.plupload(
+                '{{ id }}',
+                {
+                    url: '{{ url('widop_plupload_upload') }}',
+                    upload_dir: '{{ upload_dir }}',
+                    picture: {% if picture %}true{% else %}false{% endif %},
+                    picture_path: {% if picture_path is not null %}'{{ picture_path }}'{% else %}null{% endif %}
+                }
+            );
+        });
+
+    </script>
+
+{% endspaceless %}
+{% endblock %}

@@ -1,0 +1,9 @@
+parameters:
+    widop_plupload.form.type.class: Widop\PluploadBundle\Form\Type\PluploadType
+
+services:
+    form.type.plupload:
+        class: %widop_plupload.form.type.class%
+        arguments: [%widop_plupload.web_dir%]
+        tags:
+            - { name: form.type, alias: plupload }
