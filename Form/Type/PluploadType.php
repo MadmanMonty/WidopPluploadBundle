@@ -48,9 +48,9 @@ class PluploadType extends AbstractType
     public function buildView(FormViewInterface $view, FormInterface $form, array $options)
     {
         $view
-            ->set('upload_dir', $form->getAttribute('upload_dir'))
-            ->set('picture', $form->getAttribute('picture'))
-            ->set('picture_path', $form->getAttribute('picture_path'));
+            ->setVar('upload_dir', $form->getAttribute('upload_dir'))
+            ->setVar('picture', $form->getAttribute('picture'))
+            ->setVar('picture_path', $form->getAttribute('picture_path'));
     }
 
     /**
