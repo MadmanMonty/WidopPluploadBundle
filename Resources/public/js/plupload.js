@@ -50,7 +50,7 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
         };
 
         $.extend(this.options, options);
-        
+
         buildSelectors(widgetSelector);
         buildContainer();
 
@@ -81,9 +81,9 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
          */
         function buildContainer() {
             var browseButtonHtml =
-                '<a id="' + that.selectors.browseButton + '" class="btn" href="#">' +
+                '<button id="' + that.selectors.browseButton + '" class="btn">' +
                     '<i class="icon-upload"></i> ' + ExposeTranslation.get('plupload.button.upload') +
-                '</a>';
+                '</button>';
 
             var progressHtml = '<div id="' + that.selectors.progressBar + '" class="progress progress-striped active span4" style="margin: 5px 0 0 0; display: none;">' +
                     '<div class="bar" style="width: 1%;"></div>' +
@@ -97,7 +97,7 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
 
             if (that.options.picture) {
                 var pictureHtml = '<img id="' + that.selectors.picture + '" src="" alt="Uploaded picture" style="display: none;width: 500px;" />';
-                var pictureRemoveHtml = '<a id="' + that.selectors.pictureRemove + '" href="#" style="display: none;">' + ExposeTranslation.get('plupload.button.remove') + '</a>';
+                var pictureRemoveHtml = '<button id="' + that.selectors.pictureRemove + '" style="display: none;">' + ExposeTranslation.get('plupload.button.remove') + '</button>';
 
                 $('#' + that.selectors.container).append(pictureHtml);
                 $('#' + that.selectors.container).append(pictureRemoveHtml);
@@ -143,21 +143,10 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
          * Binds the plupload events.
          */
         function bindPluploadEvents() {
-            that.uploader.bind('FilesAdded', function (up, files) {
-                onFilesAdded(up, files);
-            });
-
-            that.uploader.bind('UploadProgress', function (up, file) {
-                onUploadProgress(up, file);
-            });
-
-            that.uploader.bind('FileUploaded', function (up, file, info) {
-                onFileUploaded(up, file, info);
-            });
-
-            that.uploader.bind('Error', function (up, error) {
-                onError(up, error);
-            });
+            that.uploader.bind('FilesAdded', onFilesAdded);
+            that.uploader.bind('UploadProgress', onUploadProgress);
+            that.uploader.bind('FileUploaded', onFileUploaded);
+            that.uploader.bind('Error', onError);
         }
 
         /**
