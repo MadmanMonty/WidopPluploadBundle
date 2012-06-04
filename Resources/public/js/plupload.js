@@ -204,7 +204,6 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
 
                 $('#' + that.selectors.browseButton).fadeIn(200);
                 $('#' + that.selectors.error).fadeIn(200, function () {
-                    console.log(error);
                     widop.eventEmitter.emit('Error', that, up, error);
                 });
             });
