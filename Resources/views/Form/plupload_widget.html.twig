@@ -17,9 +17,9 @@
             var {{ id }} = new widop.plupload(
                 '{{ id }}',
                 {
-                    url: '{{ url('widop_plupload_upload') }}',
-                    upload_dir: '{{ upload_dir }}',
-                    picture: {% if picture %}true{% else %}false{% endif %},
+                    url:          '{{ url('widop_plupload_upload') }}',
+                    upload_dir:   '{{ upload_dir }}',
+                    picture:      {% if picture %}true{% else %}false{% endif %},
                     picture_path: {% if picture_path is not null %}'{{ picture_path }}'{% else %}null{% endif %}
                 }
             );

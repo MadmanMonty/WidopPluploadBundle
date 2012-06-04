@@ -8,6 +8,8 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
      *
      * @param widgetSelector The widget selector.
      * @param options        The plupload options.
+     *
+     * @see http://www.plupload.com/documentation.php to see available options.
      */
     widop.plupload = function(widgetSelector, options) {
 
@@ -22,15 +24,15 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
         this.uploader = null;
 
         /**
-         * @var The widop plupload selectors.
+         * @var The widop plupload CSS selectors, in order to manipulate the DOM with JS style it with CSS.
          *
          * The availables selectors are:
-         *  - container
-         *  - widget
-         *  - browserButton
-         *  - progressBar
-         *  - error
-         *  - picture
+         *  - widget       Base selector.
+         *  - container    Global div container of the widget.
+         *  - browseButton Button used to choose the file to upload.
+         *  - progressBar  Progress bar used to show upload status.
+         *  - error        Error message.
+         *  - picture      Picture displayed in case of a picture upload.
          */
         this.selectors = {};
 
@@ -64,7 +66,7 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
         /**
          * Builds the widop plupload selectors.
          *
-         * @param widgetSelector The widget selector.
+         * @param widgetSelector The widget base selector.
          */
         function buildSelectors(widgetSelector) {
             that.selectors.widget = widgetSelector;
@@ -77,7 +79,7 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
         }
 
         /**
-         * Builds the plupload container.
+         * Builds the plupload container and all the DOM elements needed to render the plupload.
          */
         function buildContainer() {
             var browseButtonHtml =
