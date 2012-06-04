@@ -50,15 +50,7 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
         };
 
         $.extend(this.options, options);
-
-        //construct();
-
-        /**
-         * Constructor : Initialize the uploader, the events and builds the interface.
-         *
-         * @private
-         */
-        //function construct() {
+        
         buildSelectors(widgetSelector);
         buildContainer();
 
@@ -68,7 +60,6 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
 
         this.uploader.init();
         bindPluploadEvents();
-        //}
 
         /**
          * Builds the widop plupload selectors.
