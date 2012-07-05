@@ -21,6 +21,11 @@
                     upload_dir:   '{{ upload_dir }}',
                     picture:      {% if picture %}true{% else %}false{% endif %},
                     picture_path: {% if picture_path is not null %}'{{ picture_path }}'{% else %}null{% endif %}
+                    {% for key, option in options %}
+                         {% if loop.index == 1 %},{% endif %}
+                         {{ key }}: {{ option }}
+                         {% if not loop.last %},{% endif %}
+                    {% endfor %}
                 }
             );
         });

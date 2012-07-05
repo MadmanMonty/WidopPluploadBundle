@@ -39,7 +39,8 @@ class PluploadType extends AbstractType
         $builder
             ->setAttribute('upload_dir', $options['upload_dir'])
             ->setAttribute('picture', $options['picture'])
-            ->setAttribute('picture_path', $options['picture_path']);
+            ->setAttribute('picture_path', $options['picture_path'])
+            ->setAttribute('options', $options['options']);
     }
 
     /**
@@ -50,7 +51,8 @@ class PluploadType extends AbstractType
         $view
             ->setVar('upload_dir', $form->getAttribute('upload_dir'))
             ->setVar('picture', $form->getAttribute('picture'))
-            ->setVar('picture_path', $form->getAttribute('picture_path'));
+            ->setVar('picture_path', $form->getAttribute('picture_path'))
+            ->setVar('options', $form->getAttribute('options'));
     }
 
     /**
@@ -62,6 +64,7 @@ class PluploadType extends AbstractType
             'upload_dir'   => $this->uploadDir,
             'picture'      => false,
             'picture_path' => null,
+            'options'      => array(),
         ));
 
         $resolver->addAllowedValues(array(
