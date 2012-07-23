@@ -4,7 +4,7 @@ namespace Widop\PluploadBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType,
     Symfony\Component\Form\FormBuilderInterface,
-    Symfony\Component\Form\FormViewInterface,
+    Symfony\Component\Form\FormView,
     Symfony\Component\Form\FormInterface,
     Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -46,13 +46,14 @@ class PluploadType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormViewInterface $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view
-            ->setVar('upload_dir', $form->getAttribute('upload_dir'))
-            ->setVar('picture', $form->getAttribute('picture'))
-            ->setVar('picture_path', $form->getAttribute('picture_path'))
-            ->setVar('options', $form->getAttribute('options'));
+        $view->vars = array_replace($view->vars, array(
+            'upload_dir'   => $form->getAttribute('upload_dir'),
+            'picture'      => $form->getAttribute('picture'),
+            'picture_path' => $form->getAttribute('picture_path'),
+            'options'      => $form->getAttribute('options'),
+        ));
     }
 
     /**
