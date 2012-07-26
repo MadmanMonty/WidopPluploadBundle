@@ -38,6 +38,7 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
 
         /**
          * @var The default plupload options.
+         *
          */
         this.options = {
             runtimes:      'html5,html4',
@@ -97,15 +98,32 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
             $('#' + that.selectors.container).append(progressHtml);
             $('#' + that.selectors.container).append(errorHtml);
 
-            if (that.options.picture) {
-                var pictureHtml = '<img id="' + that.selectors.picture + '" src="" alt="Uploaded picture" style="display: none;width: 500px;" />';
+            if (that.options.picture_options.is_displayed) {
+                var pictureHtml = '<img id="' + that.selectors.picture + '" src="" alt="Uploaded picture" style="display: none;';
+
+                if (that.options.picture_options.max_width != null && that.options.picture_options.max_width != '') {
+                    pictureHtml += ' max-width:' + that.options.picture_options.max_width + 'px;';
+                }
+
+                if (that.options.picture_options.max_height != null && that.options.picture_options.max_height != '') {
+                    pictureHtml += ' max-height:' + that.options.picture_options.max_height + 'px;';
+                }
+
+                pictureHtml += '"';
+
+                if (that.options.picture_options.class != null && that.options.picture_options.class != '') {
+                    pictureHtml += ' class="' + that.options.picture_options.class + '"';
+                }
+
+                pictureHtml += ' />';
+
                 var pictureRemoveHtml = '<button id="' + that.selectors.pictureRemove + '" style="display: none;">' + ExposeTranslation.get('plupload.button.remove') + '</button>';
 
                 $('#' + that.selectors.container).append(pictureHtml);
                 $('#' + that.selectors.container).append(pictureRemoveHtml);
 
-                if (that.options.picture_path != null) {
-                    showBuildedPicture(that.options.picture_path);
+                if (that.options.picture_options.web_path != null) {
+                    showBuildedPicture(that.options.picture_options.web_path);
                 } else if ($('#' + that.selectors.widget).val() != '') {
                     showBuildedPicture(that.options.upload_dir + '/' + $('#' + that.selectors.widget).val());
                 } else {
@@ -185,7 +203,7 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
                 $('#' + that.selectors.browseButton).fadeOut(200, function () {
                     $('#' + that.selectors.widget).val(response.result);
 
-                    if (that.options.picture) {
+                    if (that.options.picture_options.is_displayed) {
                         $('#' + that.selectors.picture).attr('src', that.options.upload_dir + '/' + response.result);
                         $('#' + that.selectors.picture).fadeIn(200, function () {
                             widop.eventEmitter.emit('FileUploaded', that, up, file, info);

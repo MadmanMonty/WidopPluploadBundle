@@ -38,8 +38,7 @@ class PluploadType extends AbstractType
     {
         $builder
             ->setAttribute('upload_dir', $options['upload_dir'])
-            ->setAttribute('picture', $options['picture'])
-            ->setAttribute('picture_path', $options['picture_path'])
+            ->setAttribute('picture_options', $options['picture_options'])
             ->setAttribute('options', $options['options']);
     }
 
@@ -49,10 +48,9 @@ class PluploadType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars = array_replace($view->vars, array(
-            'upload_dir'   => $form->getAttribute('upload_dir'),
-            'picture'      => $form->getAttribute('picture'),
-            'picture_path' => $form->getAttribute('picture_path'),
-            'options'      => $form->getAttribute('options'),
+            'upload_dir'      => $form->getAttribute('upload_dir'),
+            'picture_options' => $form->getAttribute('picture_options'),
+            'options'         => $form->getAttribute('options'),
         ));
     }
 
@@ -62,14 +60,15 @@ class PluploadType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'upload_dir'   => $this->uploadDir,
-            'picture'      => false,
-            'picture_path' => null,
-            'options'      => array(),
-        ));
-
-        $resolver->addAllowedValues(array(
-            'picture' => array(true, false),
+            'upload_dir'      => $this->uploadDir,
+            'picture_options' => array(
+                'is_displayed' => false,
+                'web_path'     => null,
+                'max_width'    => null,
+                'max_height'   => null,
+                'class'        => null
+            ),
+            'options'         => array(),
         ));
     }
 
