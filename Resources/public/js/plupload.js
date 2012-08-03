@@ -136,7 +136,8 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
             $(document).on('click', '#' + that.selectors.pictureRemove, function (event) {
                 event.preventDefault();
 
-                $('#' + that.selectors.picture).attr('src', null);
+                $('#' + that.selectors.widget).val('');
+                $('#' + that.selectors.picture).attr('src', '');
 
                 $('#' + that.selectors.picture).hide();
                 $('#' + that.selectors.pictureRemove).hide();
