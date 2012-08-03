@@ -123,7 +123,7 @@ window.widop.eventEmitter = window.widop.eventEmitter || new EventEmitter();
                 $('#' + that.selectors.container).append(pictureRemoveHtml);
 
                 if (that.options.picture_options.web_path != null) {
-                    showBuildedPicture(that.options.picture_options.web_path);
+                    showBuildedPicture(that.options.picture_options.web_path + '/' + $('#' + that.selectors.widget).val());
                 } else if ($('#' + that.selectors.widget).val() != '') {
                     showBuildedPicture(that.options.upload_dir + '/' + $('#' + that.selectors.widget).val());
                 } else {
