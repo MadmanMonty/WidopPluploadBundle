@@ -14,35 +14,42 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            var {{ id }} = new widop.plupload(
-                '{{ id }}',
-                {
-                    url:          '{{ url('widop_plupload_upload') }}',
-                    upload_dir:   '{{ upload_dir }}',
-                    picture_options:
+            window.widop.eventEmitter.once('plupload_instanciate', pluploadCreation);
+
+            function pluploadCreation() {
+                var {{ id }} = new widop.plupload(
+                    '{{ id }}',
                     {
-                        {% for key, picture_option in picture_options %}
+                        url:          '{{ url('widop_plupload_upload') }}',
+                        upload_dir:   '{{ upload_dir }}',
+                        picture_options:
+                        {
+                            {% for key, picture_option in picture_options %}
 
-                            {% if key == 'is_displayed' %}
-                                {{ key }}: {% if picture_option %}true{% else %}false{% endif %}
-                            {% elseif key == 'web_path' %}
-                                {{ key }}: {% if picture_option is not null %}'{{ picture_option }}'{% else %}null{% endif %}
-                            {% else %}
-                                {{ key }}: '{{ picture_option }}'
-                            {% endif %}
+                                {% if key == 'is_displayed' %}
+                                    {{ key }}: {% if picture_option %}true{% else %}false{% endif %}
+                                {% elseif key == 'web_path' %}
+                                    {{ key }}: {% if picture_option is not null %}'{{ picture_option }}'{% else %}null{% endif %}
+                                {% else %}
+                                    {{ key }}: '{{ picture_option }}'
+                                {% endif %}
 
+                                {% if not loop.last %},{% endif %}
+                            {% endfor %}
+                        },
+
+                        {% for key, option in options %}
+                            {{ key }}: {{ option }}
                             {% if not loop.last %},{% endif %}
                         {% endfor %}
-                    },
+                    }
+                );
+            }
 
-                    {% for key, option in options %}
-                         {{ key }}: {{ option }}
-                         {% if not loop.last %},{% endif %}
-                    {% endfor %}
-                }
-            );
+            if ($('#{{ id }}').length) {
+                window.widop.eventEmitter.emit('plupload_instanciate');
+            }
         });
-
     </script>
 
 {% endspaceless %}

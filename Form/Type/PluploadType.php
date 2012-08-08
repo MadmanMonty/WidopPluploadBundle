@@ -39,6 +39,7 @@ class PluploadType extends AbstractType
         $builder
             ->setAttribute('upload_dir', $options['upload_dir'])
             ->setAttribute('picture_options', $options['picture_options'])
+            ->setAttribute('in_collection', $options['in_collection'])
             ->setAttribute('options', $options['options']);
     }
 
@@ -50,6 +51,7 @@ class PluploadType extends AbstractType
         $view->vars = array_replace($view->vars, array(
             'upload_dir'      => $form->getAttribute('upload_dir'),
             'picture_options' => $form->getAttribute('picture_options'),
+            'in_collection'   => $form->getAttribute('in_collection'),
             'options'         => $form->getAttribute('options'),
         ));
     }
@@ -68,6 +70,7 @@ class PluploadType extends AbstractType
                 'max_height'   => null,
                 'class'        => null
             ),
+            'in_collection'   => false,
             'options'         => array(),
         ));
     }
