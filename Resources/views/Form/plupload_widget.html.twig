@@ -39,7 +39,7 @@
                         },
 
                         {% for key, option in options %}
-                            {{ key }}: {{ option }}
+                            {{ key }}: '{{ option }}'
                             {% if not loop.last %},{% endif %}
                         {% endfor %}
                     }
