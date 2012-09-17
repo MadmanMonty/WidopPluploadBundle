@@ -27,9 +27,16 @@ class UploadController extends Controller
             $file->getFilename() . '.' . $file->guessExtension()
         );
 
+        $content = array('jsonrpc' => '2.0', 'id' => 'id', 'result' => $file->getFilename());
+
+        if (($size = @getimagesize($file->getRealPath()))) {
+            $content['width'] = $size[0];
+            $content['height'] = $size[1];
+        }
+
         $response = new Response();
         $response->headers->set('Content-type', 'application/json');
-        $response->setContent(json_encode(array('jsonrpc' => '2.0', 'id' => 'id', 'result' => $file->getFilename())));
+        $response->setContent(json_encode($content));
 
         return $response;
     }
